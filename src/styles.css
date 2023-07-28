@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #636363;}
+
+button:focus{
+    outline: none;
+}
+
+.mdc-form-field>label  {
+    color: white; /* Cambia el color del texto a blanco */
+}
+
+.mat-mdc-radio-button.mat-primary {
+    --mdc-radio-disabled-selected-icon-color: #ffffff;
+    --mdc-radio-disabled-unselected-icon-color: #ffffff;
+    --mdc-radio-unselected-hover-icon-color: #ffffff;
+    --mdc-radio-unselected-icon-color: rgba(255, 255, 255, 0.54);
+    --mdc-radio-unselected-pressed-icon-color: rgba(255, 255, 255, 0.54);
+    --mdc-radio-selected-focus-icon-color: #F44336;
+    --mdc-radio-selected-hover-icon-color: #F44336;
+    --mdc-radio-selected-icon-color: #F44336;
+    --mdc-radio-selected-pressed-icon-color: #F44336;
+    --mat-radio-ripple-color: #ffffff;
+    --mat-radio-checked-ripple-color: #F44336;
+    --mat-radio-disabled-label-color: rgba(255, 255, 255, 0.38);
+}

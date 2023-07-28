@@ -1,0 +1,149 @@
+<div class="row">
+    <div class="col-lg-6">
+        <h2 style="color: white;">{{accion}} Empleado</h2>
+    </div>  
+</div>
+<!-- Permite tener una visualización en tiempo real en formato json de los datos ingresados 
+en el formulario 
+
+<pre>{{myForm.value | json}}</pre>
+
+-->
+
+
+<!--Formulario -->
+<div class="row">
+    <div class="col-lg-4">
+        <form [formGroup]="myForm" autocomplete="off" style="margin-top: 5px;">
+
+            <!-- Nombre Completo -->
+            <div class="col-lg-12">
+                <!-- Input -->
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Nombre Completo</mat-label>
+                    <input type="text" oninput="this.value = this.value.replace(/[^A-Za-zñÑáéíóúÁÉÍÓÚ\s. ]/g, '').replace(/(\..*)\./g, '$1');" matInput formControlName="nombreCompleto">
+                </mat-form-field>
+
+                <!-- Mensaje para validación de Nombre Completo requerido -->
+                <div *ngIf="myForm.get('nombreCompleto')?.hasError('required') && myForm.get('nombreCompleto')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo <strong>requerido </strong></span>
+                </div>
+
+                <!-- Mensaje para validación longitud del nombre maximo 20 caracteres -->
+                <div *ngIf="myForm.get('nombreCompleto')?.hasError('maxlength') && myForm.get('nombreCompleto')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> El campo debe tener maximo <strong> 20 caracteres </strong></span>
+                </div>
+            </div>
+
+             <!-- Correo -->
+            <div class="col-lg-12">
+
+                <!-- Input -->
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Correo</mat-label>
+                    <input matInput formControlName="correo">
+                </mat-form-field>
+
+                <!-- Mensaje para validación ingreso del email  -->
+                <div *ngIf="myForm.get('correo')?.hasError('required') && myForm.get('correo')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo <strong>requerido </strong></span>
+                </div>
+
+                <!-- Mensaje para validación de campo tipo email  -->
+                <div *ngIf="myForm.get('correo')?.hasError('email') && myForm.get('correo')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo debe ser de tipo <strong>email</strong></span>
+                </div>
+            </div>
+
+            <!-- Fecha Ingreso -->
+            <div class="col-lg-12">
+
+                <!-- Input -->
+                <mat-form-field class="example-container">
+                    <mat-label>Fecha Ingreso</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="fechaIngreso">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                  </mat-form-field>
+
+                  <!-- Mensaje para validación de la Fecha de Ingreso -->
+                  <div *ngIf="myForm.get('fechaIngreso')?.hasError('required') && myForm.get('fechaIngreso')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo <strong>requerido </strong></span>
+                </div>
+                
+            </div>
+
+            <!-- Telefono -->
+            <div class="col-lg-12">
+
+                <!-- Input -->
+                <mat-form-field class="example-container">
+                    <mat-label>Telefono</mat-label>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"  formControlName="numeroTarjeta" maxlength="10" matInput formControlName="telefono">
+                </mat-form-field>
+
+                <!-- Mensaje para validación ingreso del telefono  -->
+                <div *ngIf="myForm.get('telefono')?.hasError('required') && myForm.get('telefono')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo <strong>requerido </strong></span>
+                </div>
+
+                 <!-- Mensaje para validación longitud del telefono minimo 10 caracteres -->
+                 <div *ngIf="myForm.get('telefono')?.hasError('minlength') && myForm.get('telefono')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> El campo debe tener minimo <strong> 10 caracteres </strong></span>
+                </div>
+            </div>
+
+            <!-- Estado Civil -->
+            <div class="col-lg-12">
+                 <!-- Select -->
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Estado Civil</mat-label>
+                    <mat-select formControlName="estadoCivil">
+                        <!-- Options -->
+                        <mat-option *ngFor="let estadoCivil of estadosCiviles" [value]="estadoCivil">
+                            {{estadoCivil}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Mensaje para validación ingreso del estado Civil  -->
+                <div *ngIf="myForm.get('estadoCivil')?.hasError('required') && myForm.get('estadoCivil')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo <strong>requerido </strong></span>
+                </div>
+            </div>
+
+            <!-- Sexo -->
+            <div class="col-lg-12" >
+                <!-- Radio Button -->
+                <mat-radio-group aria-label="Seleccione sexo" formControlName="sexo">
+                    <!-- Options -->
+                    <mat-radio-button value="M" style="margin-right: 10px;">Masculino</mat-radio-button>
+                    <mat-radio-button value="F"> Femenino</mat-radio-button>
+                </mat-radio-group>
+                <!-- Mensaje para validación ingreso del sexo  -->
+                <div *ngIf="myForm.get('sexo')?.hasError('required') && myForm.get('sexo')?.touched" style="margin-top: -20px;">
+                    <span class="mda-form-msg"> Este campo <strong>requerido </strong></span>
+                </div>
+            </div>
+            <br>
+
+             <!-- Botones -->
+            <div class="col-lg-12" style="text-align:right;">
+
+                <!-- Button Aceptar -->
+                <button class="btn btn-success btn-lg" type="button" style="margin-right: 20px;" (click)="guardarEmpleado()" [disabled]="!myForm.valid">Aceptar</button>
+                
+                <!-- Button Cancelar -->
+                <button class="btn btn-lg" style="background-color: #262626; color: white;" type="button" routerLink="/">Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+
+     <!-- Imagen -->
+    <div class="col-lg-4 offset-lg-3">
+
+         <!-- Img -->
+        <img src="./../../../assets/img/work.png" width="105%" height="85%">
+    </div>
+</div>
